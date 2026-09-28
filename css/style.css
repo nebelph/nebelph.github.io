@@ -1,0 +1,141 @@
+/* ===== Палитра (светлая тема по умолчанию) ===== */
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --accent: #808080;
+  --accent-hover: #1a1a1a;
+}
+
+/* Тёмная тема — включается по настройке системы */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111111;
+    --text: #eaeaea;
+    --muted: #9a9a9a;
+    --accent: #8a8a8a;
+    --accent-hover: #ffffff;
+  }
+}
+
+/* ===== База ===== */
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;        /* nav / main / footer друг под другом */
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Переключатель языка ===== */
+.lang {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-top: 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.lang button {
+  font: inherit;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lang button:hover { color: var(--text); }
+.lang button[aria-pressed="true"] { color: var(--text); font-weight: 600; }
+
+/* ===== Карточка по центру ===== */
+.card {
+  flex: 1;                       /* занимает всё свободное место по высоте */
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 0;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--accent);
+}
+
+.name {
+  margin: 24px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* ===== Кнопки соцсетей ===== */
+.links {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;               /* на узком экране переносятся */
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+.btn:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* Видимая рамка при навигации с клавиатуры (Tab) */
+.btn:focus-visible,
+.lang button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* ===== Подвал ===== */
+.footer {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
