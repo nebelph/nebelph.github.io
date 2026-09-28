@@ -5,6 +5,9 @@
   --muted: #6b6b6b;
   --accent: #808080;
   --accent-hover: #1a1a1a;
+  /* градиент текста: светло-серый → тёмно-серый → светло-серый */
+  --grad-edge: #a8a8a8;
+  --grad-mid: #2a2a2a;
 }
 
 /* Тёмная тема — включается по настройке системы */
@@ -15,6 +18,9 @@
     --muted: #9a9a9a;
     --accent: #8a8a8a;
     --accent-hover: #ffffff;
+    /* на тёмном фоне середина светлая, иначе текст сольётся с фоном */
+    --grad-edge: #5c5c5c;
+    --grad-mid: #f0f0f0;
   }
 }
 
@@ -82,8 +88,17 @@ body {
   border: 1px solid var(--accent);
 }
 
+/* Градиентный текст: фон-градиент обрезается по форме букв */
+.name,
+.role {
+  background: linear-gradient(90deg, var(--grad-edge), var(--grad-mid), var(--grad-edge));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .name {
-  margin: 24px 0 0;
+  margin: 48px 0 0;               /* отступ от фото */
   font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -91,14 +106,13 @@ body {
 
 .role {
   margin: 4px 0 0;
-  color: var(--muted);
   font-size: 16px;
 }
 
 /* ===== Кнопки соцсетей ===== */
 .links {
   list-style: none;
-  margin: 32px 0 0;
+  margin: 56px 0 0;               /* отступ от имени */
   padding: 0;
   display: flex;
   flex-wrap: wrap;               /* на узком экране переносятся */

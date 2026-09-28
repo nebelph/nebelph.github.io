@@ -3,12 +3,10 @@ const translations = {
   en: {
     title: "Artyom Rudakov",
     name: "Artyom Rudakov",
-    email: "Email",
   },
   ru: {
     title: "Артём Рудаков",
     name: "Артём Рудаков",
-    email: "Почта",
   },
 };
 
