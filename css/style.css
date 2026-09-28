@@ -1,35 +1,43 @@
-/* ===== Палитра (светлая тема по умолчанию) ===== */
+/* ===== Палитра ===== */
+/* Фон — тёмное изображение с серыми волнами (assets/background.jpg,
+   исходник — assets/src/background.svg), поэтому весь текст светлый.
+   Тема одна для любых настроек системы. */
 :root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
-  --accent: #808080;
-  --accent-hover: #1a1a1a;
-}
-
-/* Тёмная тема — включается по настройке системы */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111111;
-    --text: #eaeaea;
-    --muted: #9a9a9a;
-    --accent: #8a8a8a;
-    --accent-hover: #ffffff;
-  }
+  --bg: #0d0d0d;                 /* цвет, пока картинка не загрузилась */
+  --text: #f2f2f2;
+  --muted: #b8b8b8;
+  --accent: #8c8c8c;
+  --accent-hover: #ffffff;
+  /* тёмная обводка текста — чтобы он не сливался со светлыми волнами */
+  --text-outline:
+    0 0 1px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
 }
 
 /* ===== База ===== */
 * { box-sizing: border-box; }
 
-html, body { height: 100%; }
+html, body { min-height: 100%; }
+
+html {
+  /* Затемнение поверх картинки — чтобы текст читался на светлых волнах.
+     cover: картинка заполняет экран целиком, лишнее обрезается по краям. */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../assets/background.jpg") center / cover no-repeat fixed,
+    var(--bg);
+}
 
 body {
   margin: 0;
   padding: 0 16px;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;        /* nav / main / footer друг под другом */
-  background: var(--bg);
   color: var(--text);
+  text-shadow: var(--text-outline); /* наследуется всем текстом страницы */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -48,10 +56,11 @@ body {
 
 .lang button {
   font: inherit;
+  width: 2.5em;                  /* фиксированная ширина: жирный шрифт активной кнопки не сдвигает соседнюю */
   color: var(--muted);
   background: none;
   border: none;
-  padding: 4px 6px;
+  padding: 4px 0;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -79,6 +88,8 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--accent);
+  /* мягкое свечение вокруг рамки */
+  box-shadow: 0 0 18px 2px rgba(255, 255, 255, 0.18);
 }
 
 .name {
@@ -97,7 +108,7 @@ body {
 /* ===== Кнопки соцсетей ===== */
 .links {
   list-style: none;
-  margin: 32px 0 0;
+  margin: 56px 0 0;               /* отступ от имени */
   padding: 0;
   display: flex;
   flex-wrap: wrap;               /* на узком экране переносятся */
@@ -108,14 +119,19 @@ body {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 144px;                  /* одинаковая фиксированная ширина: кнопки не прыгают при смене языка */
   gap: 8px;
   padding: 10px 18px;
   border: 1px solid var(--accent);
   border-radius: 8px;
+  background: rgba(0, 0, 0, 0.45);  /* затемнение под кнопкой */
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);       /* фон под кнопкой слегка размыт */
   color: var(--muted);
   text-decoration: none;
   font-size: 15px;
-  transition: color 150ms ease, border-color 150ms ease;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
 }
 
 .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
@@ -123,6 +139,7 @@ body {
 .btn:hover {
   color: var(--accent-hover);
   border-color: var(--accent-hover);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 /* Видимая рамка при навигации с клавиатуры (Tab) */
@@ -130,6 +147,31 @@ body {
 .lang button:focus-visible {
   outline: 2px solid var(--text);
   outline-offset: 2px;
+}
+
+/* ===== Всплывающее уведомление ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 72px;                     /* выше подвала */
+  transform: translate(-50%, 12px);
+  width: max-content;               /* ширина по тексту, без лишних переносов */
+  max-width: calc(100% - 32px);
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: rgba(15, 15, 15, 0.9);
+  color: var(--text);
+  font-size: 14px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;             /* не мешает кликам, пока скрыто */
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 /* ===== Подвал ===== */
