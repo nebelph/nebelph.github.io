@@ -1,40 +1,37 @@
-/* ===== Палитра (светлая тема по умолчанию) ===== */
+/* ===== Палитра ===== */
+/* Фон — вертикальный градиент: светло-серый → тёмно-серый → светло-серый.
+   Переключатель языка и подвал лежат на светлых краях (тёмный текст),
+   карточка — на тёмной середине (светлый текст, см. .card). */
 :root {
-  --bg: #ffffff;
+  --bg-edge: #e4e4e4;
+  --bg-mid: #2e2e2e;
   --text: #1a1a1a;
-  --muted: #6b6b6b;
+  --muted: #555555;
   --accent: #808080;
   --accent-hover: #1a1a1a;
-  /* градиент текста: светло-серый → тёмно-серый → светло-серый */
-  --grad-edge: #a8a8a8;
-  --grad-mid: #2a2a2a;
-}
-
-/* Тёмная тема — включается по настройке системы */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111111;
-    --text: #eaeaea;
-    --muted: #9a9a9a;
-    --accent: #8a8a8a;
-    --accent-hover: #ffffff;
-    /* на тёмном фоне середина светлая, иначе текст сольётся с фоном */
-    --grad-edge: #5c5c5c;
-    --grad-mid: #f0f0f0;
-  }
+  color-scheme: light;           /* градиент один для любой темы системы */
 }
 
 /* ===== База ===== */
 * { box-sizing: border-box; }
 
-html, body { height: 100%; }
+html, body { min-height: 100%; }
+
+html {
+  /* тёмная середина занимает центр экрана, где лежит карточка */
+  background: linear-gradient(180deg,
+    var(--bg-edge) 0%,
+    var(--bg-mid) 35%,
+    var(--bg-mid) 65%,
+    var(--bg-edge) 100%) fixed;
+}
 
 body {
   margin: 0;
   padding: 0 16px;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;        /* nav / main / footer друг под другом */
-  background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.5;
@@ -68,6 +65,12 @@ body {
 
 /* ===== Карточка по центру ===== */
 .card {
+  /* на тёмной середине фона — светлые цвета */
+  --text: #f2f2f2;
+  --muted: #c4c4c4;
+  --accent: #9a9a9a;
+  --accent-hover: #ffffff;
+  color: var(--text);
   flex: 1;                       /* занимает всё свободное место по высоте */
   width: 100%;
   max-width: 600px;
@@ -88,17 +91,8 @@ body {
   border: 1px solid var(--accent);
 }
 
-/* Градиентный текст: фон-градиент обрезается по форме букв */
-.name,
-.role {
-  background: linear-gradient(90deg, var(--grad-edge), var(--grad-mid), var(--grad-edge));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .name {
-  margin: 48px 0 0;               /* отступ от фото */
+  margin: 24px 0 0;
   font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -106,6 +100,7 @@ body {
 
 .role {
   margin: 4px 0 0;
+  color: var(--muted);
   font-size: 16px;
 }
 
