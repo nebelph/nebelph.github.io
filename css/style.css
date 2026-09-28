@@ -149,6 +149,31 @@ body {
   outline-offset: 2px;
 }
 
+/* ===== Всплывающее уведомление ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 72px;                     /* выше подвала */
+  transform: translate(-50%, 12px);
+  width: max-content;               /* ширина по тексту, без лишних переносов */
+  max-width: calc(100% - 32px);
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: rgba(15, 15, 15, 0.9);
+  color: var(--text);
+  font-size: 14px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;             /* не мешает кликам, пока скрыто */
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* ===== Подвал ===== */
 .footer {
   padding: 20px 0;

@@ -3,10 +3,14 @@ const translations = {
   en: {
     title: "Artyom Rudakov",
     name: "Artyom Rudakov",
+    emailCopied: "Email copied to clipboard",
+    emailCopyFailed: "Couldn't copy. Email:",
   },
   ru: {
     title: "Артём Рудаков",
     name: "Артём Рудаков",
+    emailCopied: "Email скопирован в буфер обмена",
+    emailCopyFailed: "Не удалось скопировать. Email:",
   },
 };
 
