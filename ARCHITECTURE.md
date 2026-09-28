@@ -52,7 +52,7 @@ nebelph.github.io/
 │                                   │
 │             ( фото )              │  ← круглое, ~140px
 │                                   │
-│          Артём Рудаков            │  ← имя (EN: Artem Rudakov)
+│          Артём Рудаков            │  ← имя (EN: Artyom Rudakov)
 │           vibe coder              │  ← подпись, не переводится
 │                                   │
 │   [ GitHub ] [ Telegram ] [Email] │  ← кнопки: иконка + подпись
@@ -72,7 +72,7 @@ nebelph.github.io/
 **Механизм:**
 1. У каждого переводимого элемента в HTML есть атрибут-ключ, например `data-i18n="name"`.
 2. В `i18n.js` лежит словарь:
-   - `en`: `name → "Artem Rudakov"`, `email → "Email"`, …
+   - `en`: `name → "Artyom Rudakov"`, `email → "Email"`, …
    - `ru`: `name → "Артём Рудаков"`, `email → "Почта"`, …
    - подпись `vibe coder` не переводится и в словарь не входит
 3. При загрузке страницы язык выбирается так:

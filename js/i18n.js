@@ -1,8 +1,8 @@
 // Словарь переводов: ключ из атрибута data-i18n → текст на нужном языке
 const translations = {
   en: {
-    title: "Artem Rudakov",
-    name: "Artem Rudakov",
+    title: "Artyom Rudakov",
+    name: "Artyom Rudakov",
     email: "Email",
   },
   ru: {
