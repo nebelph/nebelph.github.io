@@ -1,0 +1,8 @@
+# Настройки сборки GitHub Pages (Jekyll).
+# Сайт — обычные HTML/CSS/JS, Jekyll их просто копирует.
+# exclude: служебные файлы, которые не должны попасть на сайт.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - ARCHITECTURE.md
+  - assets/src/

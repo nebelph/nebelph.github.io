@@ -36,7 +36,8 @@ nebelph.github.io/
 │   ├── favicon.svg     # иконка во вкладке браузера
 │   └── src/
 │       └── background.svg  # векторный исходник фона
-├── .nojekyll           # отключает обработку Jekyll на GitHub Pages
+├── _config.yml         # настройки Jekyll: exclude служебных файлов из публикации
+├── CLAUDE.md           # указатель для Claude на nebelph/claude (не публикуется)
 ├── ARCHITECTURE.md     # этот документ
 └── README.md           # краткое описание и как запустить локально
 ```
